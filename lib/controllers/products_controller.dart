@@ -34,7 +34,40 @@ class ProductsController extends GetxController {
 
   List<Product> get productList => _productList;
 
+  bool _loadingMore=true;
+  bool get loadingMore=>_loadingMore;
+
+  bool _hasMoreItem=false;
+  bool get hasMoreItem=>_hasMoreItem;
+
   Future<void> getProducts(BuildContext context) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      while (_page < _totalPage) {
+        Response response = await repo.getProducts(_page.toString(), '6');
+        if (response.statusCode == 200) {
+          var responseBody = ProductResponse.fromJson(response.body);
+          _productList.addAll(responseBody.content!);
+          _totalPage = responseBody.totalPages!;
+        } else {
+          Get.back();
+          var responseBody = SimpleResponse.fromJson(response.body);
+          showInfoDialog(
+            context,
+            null,
+            responseBody.message ?? 'Something wrong!',
+          );
+        }
+        _isLoading = false;
+        _page++;
+        update();
+      }
+    }
+  }
+
+
+  Future<void> getProductsWithLoadMore(BuildContext context) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
