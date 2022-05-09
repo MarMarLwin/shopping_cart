@@ -9,9 +9,11 @@ import 'package:user_stories/utils/colors.dart';
 import 'package:user_stories/widgets/big_text.dart';
 import 'package:user_stories/widgets/cart_widget.dart';
 import '../controllers/product_detail_controller.dart';
+import '../helper/app_localization.dart';
 import '../helper/route_helper.dart';
 import '../utils/dimensions.dart';
 import '../widgets/input_text_widget.dart';
+
 
 class HomePage extends GetView<ProductsController> {
   const HomePage({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class HomePage extends GetView<ProductsController> {
                 ),
                 BigText(
                     text:
-                        'Hello Kante, What fruit salad combo do you want today?',
+                        'testing'.tr,
                     size: Dimension.dimen20,
                     overflow: TextOverflow.visible),
                 SizedBox(
@@ -84,7 +86,10 @@ class HomePage extends GetView<ProductsController> {
                 SizedBox(
                   height: Dimension.dimen10,
                 ),
-                BigText(text: 'Recommended Products'),
+                //BigText(text: AppLocalizations.of(context)!.translate('recommended_product')!,),
+                GestureDetector(onTap:(){
+Get.updateLocale(Locale('en','US'));
+                },child: BigText(text: 'recommended_product'.tr)),
                 SizedBox(
                   height: Dimension.dimen10,
                 ),
@@ -199,6 +204,8 @@ class HomePage extends GetView<ProductsController> {
                                         ),
                                       );
                                     });
+
+
                           })),
                 )
               ],

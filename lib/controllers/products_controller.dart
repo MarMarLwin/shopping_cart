@@ -14,7 +14,7 @@ import 'package:user_stories/utils/dialogs.dart';
 
 import '../data/repo/login_repo.dart';
 
-class ProductsController extends GetxController {
+class ProductsController extends GetxController{
   final ProductRepo repo;
 
   ProductsController({required this.repo});
@@ -91,6 +91,11 @@ class ProductsController extends GetxController {
         update();
       }
     }
+  }
+
+  void setLoadMore(bool isLoading){
+    _loadingMore=isLoading;
+    update();
   }
 
   Future<void> addToCart() async {

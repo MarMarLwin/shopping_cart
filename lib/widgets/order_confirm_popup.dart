@@ -47,7 +47,7 @@ class _OrderConfirmPopupState extends State<OrderConfirmPopup> {
           SizedBox(height: Dimension.dimen10),
           BigText(text: 'Rating for your order.'),
           SizedBox(height: Dimension.dimen20),
-Row(
+          Row(
   mainAxisAlignment: MainAxisAlignment.spaceBetween,
   children: List<Widget>.generate(5, (index) =>GestureDetector(onTap:(){
     setState(() {

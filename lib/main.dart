@@ -7,6 +7,8 @@ import 'package:user_stories/pages/home_page.dart';
 import 'package:user_stories/pages/login_page.dart';
 import 'package:user_stories/utils/app_constants.dart';
 import 'package:user_stories/utils/colors.dart';
+import 'package:user_stories/utils/locale_string.dart';
+import 'helper/app_localization.dart';
 import 'helper/dependencies.dart' as dependency;
 
 void main() async{
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLogin=GetStorage().read('isLogin')??false;
     return GetMaterialApp(
+      translations: LocaleString(),
+      locale: Locale('mm','MM'),
+     // fallbackLocale: Locale('en','US'),
       title: 'Online Shop',
       theme: ThemeData(
         primarySwatch: primaryThemeColor,
